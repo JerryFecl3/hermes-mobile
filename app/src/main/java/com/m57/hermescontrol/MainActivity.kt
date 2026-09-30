@@ -19,6 +19,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.m57.hermescontrol.data.local.AuthManager
+import com.m57.hermescontrol.data.remote.ClientCertificates
 import com.m57.hermescontrol.data.update.UpdateNoticeManager
 import com.m57.hermescontrol.data.ws.HermesWsClient
 import com.m57.hermescontrol.notification.NotificationHelper
@@ -133,6 +134,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
+        ClientCertificates.onResume(this)
         lifecycleScope.launch {
             AuthManager.initializationState.first { it == AuthManager.InitializationState.Ready }
             UpdateNoticeManager.checkOnLaunch()
@@ -143,6 +145,7 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onPause() {
+        ClientCertificates.onPause(this)
         ExternalActivityLifecycleGuard.onHostPaused()
         // Prepare the FGS while still eligible to start it. A pause alone does
         // not mean background: rotation also pauses and recreates this activity.

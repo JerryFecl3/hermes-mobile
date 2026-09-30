@@ -3,7 +3,9 @@ package com.m57.hermescontrol.ui.settings.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -20,6 +22,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.m57.hermescontrol.R
+import com.m57.hermescontrol.ui.common.ClientCertificateControls
 import com.m57.hermescontrol.ui.common.CustomHeadersButton
 
 @Composable
@@ -47,7 +50,10 @@ internal fun ProfileEditorDialog(
         onDismissRequest = onDismiss,
         title = { Text(title) },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Column(
+                modifier = Modifier.verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
                 OutlinedTextField(
                     value = name,
                     onValueChange = onNameChange,
@@ -66,6 +72,7 @@ internal fun ProfileEditorDialog(
                     modifier = Modifier.fillMaxWidth(),
                 )
                 CustomHeadersButton(baseUrl = baseUrl, onSaved = onHeadersSaved)
+                ClientCertificateControls(baseUrl = baseUrl)
                 if (error != null) {
                     Text(
                         text = error,

@@ -153,6 +153,33 @@ Tap **Sign in** on the landing screen and enter the dashboard host and port. The
 
 Use HTTPS for remote connections. Use HTTP only on a trusted local network.
 
+### HTTPS client certificates (mTLS)
+
+When an HTTPS server requests a client certificate during its TLS handshake,
+Android's system certificate picker opens while the app is in the foreground.
+Install your client certificate using Android's settings first. The app remembers
+only the selected alias; Android keeps and uses the private key.
+
+The selection applies to the HTTPS hostname and port, across paths and profiles
+at that address. A server that does not request a client certificate works without
+one, even when a selection is remembered. Hermes login is still required, and
+server certificate and hostname verification remain enabled.
+
+The login form and **Settings → Connection → Edit** provide certificate status,
+**Select / reselect certificate**, and **Clear selection**. These actions take effect
+immediately, independently of saving the profile. Clear unbinds the alias and closes
+connections for that address; it does not delete the system certificate. The next
+TLS handshake may request a new selection. Reselecting closes existing connections
+so REST, WebSocket, images, attachments, and media use the new selection. An in-flight
+request or media playback may fail when its connection closes; retry it if needed.
+
+Cancellation suppresses further automatic prompts for that address until you
+explicitly select again, clear the selection, or restart the app. A background
+request can use an existing authorized certificate but cannot open the picker:
+bring the app forward and retry. The handshake waits at most 90 seconds for a
+selection; dismiss an expired picker and use **Select / reselect certificate** again.
+Certificate settings do not import private CAs or change Android's server trust policy.
+
 ### Cloudflare Access and custom headers
 
 1. Enter your dashboard's HTTPS URL on the login screen.

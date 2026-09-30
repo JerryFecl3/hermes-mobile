@@ -1839,4 +1839,14 @@
     <string name="account_connectors_reconnect">Reconnect</string>
     <string name="account_connectors_no_tools">No tools available</string>
     <string name="account_connectors_policy_locked">Read-only policy restrictions</string>
+    <string name="client_certificate_title">Client certificate</string>
+    <string name="client_certificate_automatic">Android will ask when the HTTPS server requests a certificate.</string>
+    <string name="client_certificate_selected">Use this certificate only when the server requests it.</string>
+    <string name="client_certificate_unavailable">Certificate unavailable or unsuitable. Select another certificate.</string>
+    <string name="client_certificate_cancelled">No certificate selected. Choose again to retry.</string>
+    <string name="client_certificate_foreground">Open the app and retry to select a certificate.</string>
+    <string name="client_certificate_scope">Applies immediately to %1$s:%2$d, including other profiles at this address.</string>
+    <string name="client_certificate_reselect">Select / reselect certificate</string>
+    <string name="client_certificate_clear">Clear selection (keep system certificate)</string>
+    <string name="client_certificate_error">Could not save the certificate selection. Try again.</string>
 </resources>

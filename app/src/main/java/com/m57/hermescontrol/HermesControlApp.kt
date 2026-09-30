@@ -11,6 +11,7 @@ import coil3.network.okhttp.OkHttpNetworkFetcherFactory
 import coil3.request.crossfade
 import com.m57.hermescontrol.data.local.AuthManager
 import com.m57.hermescontrol.data.local.SessionListCacheStore
+import com.m57.hermescontrol.data.remote.ClientCertificates
 import com.m57.hermescontrol.data.remote.NetworkMonitor
 import com.m57.hermescontrol.data.remote.OkHttpProvider
 import com.m57.hermescontrol.notification.TurnCorrelationTracker
@@ -28,6 +29,7 @@ class HermesControlApp :
 
     override fun onCreate() {
         super.onCreate()
+        ClientCertificates.initialize(this)
         AuthManager.init(this)
         NetworkMonitor.init(this)
         SessionListCacheStore.init(this)
